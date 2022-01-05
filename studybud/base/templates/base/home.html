@@ -3,13 +3,40 @@
 
 {% block content %}
 
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
+
 <h1>Home Template</h1>
 
-<div>
-
-    <a href="{% url 'create-room' %}">Create room</a>
+<div class="home-container">
 
     <div>
+        <h3>Browse topics</h3>
+        <hr>
+
+        <a href="{% url 'home'  %}">All</a>
+
+        {% for topic in topics %}
+
+        <div>
+            
+            <a href="{% url 'home'  %}?q={{ topic.name }}">{{ topic.name }}</a>
+
+        </div>
+
+        {% endfor %}
+    </div>
+
+
+    <div>
+        <h5>{{ room_count }} rooms avalable</h5>
+
+        <a href="{% url 'create-room' %}">Create room</a>
+
         {% for room in rooms %}
 
             <div>
